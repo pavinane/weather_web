@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
+import { TbTemperatureCelsius } from "react-icons/tb";
 
 const LoadingSkeleton = () => {
   return (
@@ -54,11 +55,18 @@ const Weather = () => {
     );
   if (error) return <div>Error: {error.message}</div>;
 
+  const celsius = weatherData?.main.temp - 273.15;
+  const fahrenheit = (celsius * 9) / 5 + 32;
+
+  // Add the converted temperatures to the data object
+  // data.main.tempCelsius = celsius;
+  // data.main.tempFahrenheit = fahrenheit;
+
   return (
-    <div className="mt-20 flex  flex-col gap-4 items-center">
+    <div className="mt-20 flex  flex-col gap-4 items-center  border-b border-[#bebebe]">
       {weatherData && weatherData.weather && (
         <div>
-          <div className=" flex flex-col justify-between items-end">
+          <div className=" flex flex-col justify-between items-end ">
             <div className="relative  rounded-full shadow-inner ">
               <img
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
@@ -74,15 +82,20 @@ const Weather = () => {
               /> */}
             </div>
           </div>
-          <div>
+          <div className="mt-16 flex gap-6 flex-col">
             <div>
-              <h1 className="text-6xl font-comibold">
-                {weatherData.main.temp.toFixed()} °C
+              <h1 className="text-7xl font-normal relative ">
+                {/* {weatherData.main.temp.toFixed()} */}
+                {celsius.toFixed(2)}
+                <span className="text-6xl absolute top-0">
+                  <TbTemperatureCelsius />
+                  {/* °C */}
+                </span>
               </h1>
             </div>
             <div>
-              <p className=" font-semibold   ">
-                {currentDay}{" "}
+              <p className=" font-semibold  mb-8 text-xl">
+                {currentDay} , &nbsp;
                 <span className=" font-light text-[#B1B1B1] ">
                   {formatTime(currentDateTime)}
                 </span>
