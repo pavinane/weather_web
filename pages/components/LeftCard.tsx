@@ -89,7 +89,7 @@ function LeftCard() {
 
   return (
     <div>
-      <div className="left-card text-black min-h-screen">
+      <div className="left-card text-black min-h-screen p-4">
         <div className="flex items-center gap-4 justify-between">
           <div className="flex items-center gap-4">
             <IoSearch size={20} color="#000" />

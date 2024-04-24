@@ -1,7 +1,8 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
-import { Suspense } from "react";
 
 const LoadingSkeleton = () => {
   return (
@@ -58,10 +59,11 @@ const Weather = () => {
       {weatherData && weatherData.weather && (
         <div>
           <div className="w-1/2 flex flex-col justify-between items-end">
-            <div className="relative">
+            <div className="relative bg-[#f3f3f3] rounded-full">
               <img
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-                alt=""
+                alt="weather icon"
+                className="w-40 h-40 rounded-lg"
               />
               {/* <Image
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
