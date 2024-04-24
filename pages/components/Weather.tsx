@@ -25,7 +25,7 @@ const Weather = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDateTime(new Date());
-    }, 1000); // Update every second
+    }, 500); // Update every second
 
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
@@ -59,11 +59,11 @@ const Weather = () => {
       {weatherData && weatherData.weather && (
         <div>
           <div className="w-1/2 flex flex-col justify-between items-end">
-            <div className="relative bg-[#f3f3f3] rounded-full">
+            <div className="relative  rounded-full shadow-inner  ">
               <img
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                 alt="weather icon"
-                className="w-40 h-40 rounded-lg"
+                className="w-40 h-40 rounded-lg "
               />
               {/* <Image
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}

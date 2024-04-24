@@ -1,4 +1,6 @@
-import React, { useState, useEffect, Suspense } from "react";
+"use client";
+
+import React, { useState, useEffect, Suspense, startTransition } from "react";
 import { IoSearch } from "react-icons/io5";
 import { MdLocationSearching } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +46,11 @@ function LeftCard() {
 
     if (cityName) {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(fetchData, 1000);
+      timeoutId = setTimeout(() => {
+        startTransition(() => {
+          fetchData();
+        });
+      }, 1000);
     }
 
     return () => {
@@ -108,33 +114,32 @@ function LeftCard() {
             <MdLocationSearching color="#000" />
           </div>
         </div>
-        <Suspense fallback={<BigSpinner />}>
-          <Suspense fallback={<LoadingSkeleton />}>
-            <Weather />
-            <div className="relative">
-              {placeData &&
-                placeData?.results?.map((item: any, index: number) => {
-                  if (index === 0) {
-                    const names = item.tags
-                      .slice(0, 3)
-                      .map((tag: any) => tag.title);
-                    return (
-                      <div key={item.id} className="relative">
-                        <img src={item.urls.regular} alt="" />
-                        <div className=" absolute  top-0 bottom-0  ">
-                          {names.map((name: string, index: number) => (
-                            <p key={index} className="text-[#fff]">
-                              {name}
-                            </p>
-                          ))}
-                        </div>
+
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Weather />
+          <div className="relative">
+            {placeData &&
+              placeData?.results?.map((item: any, index: number) => {
+                if (index === 0) {
+                  const names = item.tags
+                    .slice(0, 3)
+                    .map((tag: any) => tag.title);
+                  return (
+                    <div key={item.id} className="relative">
+                      <img src={item.urls.regular} alt="" />
+                      <div className=" absolute  top-0 bottom-0  ">
+                        {names.map((name: string, index: number) => (
+                          <p key={index} className="text-[#fff]">
+                            {name}
+                          </p>
+                        ))}
                       </div>
-                    );
-                  }
-                  return null;
-                })}
-            </div>
-          </Suspense>
+                    </div>
+                  );
+                }
+                return null;
+              })}
+          </div>
         </Suspense>
       </div>
     </div>

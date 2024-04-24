@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ["openweathermap.org"],
   },
+  env: {
+    NEXT_API_KEY: process.env.NEXT_API_KEY,
+    NEXT_CLIENT_ID: process.env.NEXT_CLIENT_ID,
+  },
 };
 
 export default nextConfig;

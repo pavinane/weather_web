@@ -1,3 +1,4 @@
+"use client";
 import LeftCard from "./components/LeftCard";
 import Head from "next/head";
 
