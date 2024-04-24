@@ -55,15 +55,16 @@ const Weather = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div className="mt-20 flex  flex-col gap-4 items-center">
       {weatherData && weatherData.weather && (
         <div>
-          <div className="w-1/2 flex flex-col justify-between items-end">
-            <div className="relative  rounded-full shadow-inner  ">
+          <div className=" flex flex-col justify-between items-end">
+            <div className="relative  rounded-full shadow-inner ">
               <img
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                 alt="weather icon"
-                className="w-40 h-40 rounded-lg "
+                className="w-40 h-40 rounded-full "
+                style={{ boxShadow: "inset 0px 1px 13px 2px rgba(0,0,0,0.75)" }}
               />
               {/* <Image
                 src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}

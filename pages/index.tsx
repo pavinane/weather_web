@@ -13,7 +13,7 @@ export default function Home() {
         />
       </Head>
       <div className="flex justify-between bg-[#f6f6f8]  rounded-xl  ">
-        <div className="left bg-[#fff]  rounded-l-xl w-1/3 ">
+        <div className="left bg-[#fff]  rounded-l-xl ">
           <LeftCard />
         </div>
         <div className="right ">right</div>

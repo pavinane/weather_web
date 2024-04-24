@@ -125,8 +125,8 @@ function LeftCard() {
                     .slice(0, 3)
                     .map((tag: any) => tag.title);
                   return (
-                    <div key={item.id} className="relative">
-                      <img src={item.urls.regular} alt="" />
+                    <div key={item.id} className="relative w-80">
+                      <img src={item.urls.regular} alt="" className="w-full" />
                       <div className=" absolute  top-0 bottom-0  ">
                         {names.map((name: string, index: number) => (
                           <p key={index} className="text-[#fff]">
