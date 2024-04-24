@@ -85,7 +85,6 @@ const Weather = () => {
           <div className="mt-16 flex gap-6 flex-col">
             <div>
               <h1 className="text-7xl font-normal relative ">
-                {/* {weatherData.main.temp.toFixed()} */}
                 {celsius.toFixed(2)}
                 <span className="text-6xl absolute top-0">
                   <TbTemperatureCelsius />
