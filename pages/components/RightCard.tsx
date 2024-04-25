@@ -19,6 +19,8 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 import { AiOutlinePercentage } from "react-icons/ai";
 import { GoDotFill } from "react-icons/go";
 import { ImSad2 } from "react-icons/im";
+import { Flex, Progress } from "antd";
+import type { ProgressProps } from "antd";
 
 interface RootState {
   degree: {
@@ -37,7 +39,7 @@ function RightCard() {
   const weekweatherData = useSelector(
     (state: any) => state?.weekWeather?.weatherData
   );
-  console.log("airData", airData);
+  console.log("weatherData", weatherData);
 
   const handleDegreeChange = (newDegree: string) => {
     dispatch(setDegree(newDegree));
@@ -239,7 +241,7 @@ function RightCard() {
       <div className="mt-4">
         <h1 className="text-xl font-semibold">Today's Highlights</h1>
         <div className="flex justify-between gap-4 mt-6 flex-wrap">
-          <WindStatus windNum={weatherData?.wind?.speed} />
+          <UIStatus windNum={weatherData?.wind?.speed} />
           <WindStatus windNum={weatherData?.wind?.speed} />
           <SunSet sunset={formattedSunrise} sunrise={formattedSunset} />
           <Humdidity humidityNum={weatherData?.main?.humidity} />
@@ -252,6 +254,31 @@ function RightCard() {
 }
 
 export default RightCard;
+
+export const UIStatus = ({ windNum }: any) => {
+  const twoColors: ProgressProps["strokeColor"] = {
+    "0%": "#fcdc4b",
+    "100%": "#fcdc4b",
+  };
+  return (
+    <div className="bg-white shadow-md rounded-2xl w-80  p-4 px-12 z-10 relative">
+      <h1 className="text-[#b1b1b1] text-md">UV Index</h1>
+      <div className="mt-2">
+        <Flex gap="small" wrap="wrap">
+          <Progress type="dashboard" percent={15} strokeColor={twoColors} />
+          {/* <Progress
+            type="dashboard"
+            steps={2}
+            strokeColor={twoColors}
+            percent={50}
+            trailColor="rgba(0, 0, 0, 0.06)"
+            strokeWidth={5}
+          /> */}
+        </Flex>
+      </div>
+    </div>
+  );
+};
 
 export const WindStatus = ({ windNum }: any) => {
   return (
