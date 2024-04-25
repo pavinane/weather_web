@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
-import { TbTemperatureCelsius } from "react-icons/tb";
+import { TbTemperatureCelsius, TbTemperatureFahrenheit } from "react-icons/tb";
 
 const LoadingSkeleton = () => {
   return (
@@ -17,10 +17,19 @@ const LoadingSkeleton = () => {
   );
 };
 
+interface RootState {
+  degree: {
+    day: string;
+    degree: string;
+    // other properties
+  };
+}
+
 const Weather = () => {
   const weatherData = useSelector((state: any) => state.weather.weatherData);
   const loading = useSelector((state: any) => state.weather.loading);
   const error = useSelector((state: any) => state.weather.error);
+  const degrees = useSelector((state: RootState) => state.degree.degree);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   useEffect(() => {
@@ -84,11 +93,17 @@ const Weather = () => {
           </div>
           <div className="mt-16 flex gap-6 flex-col">
             <div>
-              <h1 className="text-7xl font-normal relative ">
-                {celsius.toFixed(2)}
-                <span className="text-6xl absolute top-0">
-                  <TbTemperatureCelsius />
-                  {/* °C */}
+              <h1 className="text-6xl font-normal relative ">
+                {degrees === "celsius"
+                  ? celsius.toFixed(2)
+                  : fahrenheit.toFixed(2)}
+
+                <span className="text-3xl absolute top-0">
+                  {degrees === "celsius" ? (
+                    <TbTemperatureCelsius />
+                  ) : (
+                    <TbTemperatureFahrenheit />
+                  )}
                 </span>
               </h1>
             </div>

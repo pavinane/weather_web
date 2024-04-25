@@ -11,7 +11,7 @@ import {
   fetchAirRequest,
   fetchAirSuccess,
   fetchAirFailure,
-} from "@/store/action/AirAction";
+} from "@/store/action/airAction";
 import {
   fetchPlaceRequest,
   fetchPlaceSuccess,
@@ -134,23 +134,6 @@ function LeftCard() {
                     .slice(0, 3)
                     .map((tag: any) => tag.title);
                   return (
-                    // <div key={item.id} className="relative ">
-                    //   <img
-                    //     src={item.urls.regular}
-                    //     alt=""
-                    //     className="w-80 h-32 rounded-lg"
-                    //   />
-                    //   <div className=" absolute inset-0 flex flex-row p-4 gap-4 ">
-                    //     {names.map((name: string, index: number) => (
-                    //       <div
-                    //         key={index}
-                    //         className="text-[#fff] flex flex-row text-sm"
-                    //       >
-                    //         {name.toUpperCase()}
-                    //       </div>
-                    //     ))}
-                    //   </div>
-                    // </div>
                     <div key={item.id} className="relative ">
                       <img
                         src={item.urls.regular}

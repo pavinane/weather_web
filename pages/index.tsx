@@ -1,10 +1,11 @@
 "use client";
 import LeftCard from "./components/LeftCard";
 import Head from "next/head";
+import RightCard from "./components/RightCard";
 
 export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col justify-between `}>
+    <main className={`flex min-h-screen flex-col justify-between text-black `}>
       <Head>
         <title>Weather</title>
         <meta
@@ -16,7 +17,9 @@ export default function Home() {
         <div className="left bg-[#fff]  rounded-l-xl ">
           <LeftCard />
         </div>
-        <div className="right ">right</div>
+        <div className="right p-10  w-full ">
+          <RightCard />
+        </div>
       </div>
     </main>
   );
