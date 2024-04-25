@@ -14,7 +14,6 @@ export const fetchAirData = async (lat: any, lon: any) => {
 };
 
 export const fetchWeekWeatherData = async (lat: any, lon: any) => {
-  console.log("sdsdsdd", lat, lon);
   const apiKey = process.env.NEXT_API_KEY;
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   const response = await fetch(apiUrl);

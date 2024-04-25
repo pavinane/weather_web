@@ -7,11 +7,7 @@ import {
   fetchWeatherSuccess,
   fetchWeatherFailure,
 } from "@/store/action/weatherAction";
-import {
-  fetchAirRequest,
-  fetchAirSuccess,
-  fetchAirFailure,
-} from "@/store/action/airAction";
+
 import {
   fetchPlaceRequest,
   fetchPlaceSuccess,
@@ -25,7 +21,7 @@ import Weather from "./Weather";
 function LeftCard() {
   const dispatch = useDispatch();
   const [cityName, setCityName] = useState("chennai");
-  const airData = useSelector((state: any) => state.air.airData);
+
   const placeData = useSelector((state: any) => state.place.placeData);
   const weatherData = useSelector((state: any) => state.weather.weatherData);
 
@@ -56,25 +52,6 @@ function LeftCard() {
       clearTimeout(timeoutId);
     };
   }, [cityName, dispatch]);
-
-  useEffect(() => {
-    const fetchAirDatas = async () => {
-      if (!weatherData) return;
-      dispatch(fetchAirRequest());
-      try {
-        const data = await fetchAirData(
-          weatherData?.coord?.lat,
-          weatherData?.coord?.lon
-        );
-        dispatch(fetchAirSuccess(data));
-        console.log("air data", data);
-      } catch (error) {
-        dispatch(fetchAirFailure(error));
-      }
-    };
-
-    fetchAirDatas();
-  }, [weatherData, dispatch]);
 
   useEffect(() => {
     const fetchPlaceDatas = async () => {

@@ -17,7 +17,7 @@ export default function Home() {
         <div className="left bg-[#fff]  rounded-l-xl ">
           <LeftCard />
         </div>
-        <div className="right p-10  w-full ">
+        <div className="right p-6  w-full ">
           <RightCard />
         </div>
       </div>
