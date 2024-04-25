@@ -67,10 +67,6 @@ const Weather = () => {
   const celsius = weatherData?.main.temp - 273.15;
   const fahrenheit = (celsius * 9) / 5 + 32;
 
-  // Add the converted temperatures to the data object
-  // data.main.tempCelsius = celsius;
-  // data.main.tempFahrenheit = fahrenheit;
-
   return (
     <div className="mt-20 flex  flex-col gap-4 items-center  border-b border-[#bebebe]">
       {weatherData && weatherData.weather && (

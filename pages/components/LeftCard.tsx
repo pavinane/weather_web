@@ -59,12 +59,12 @@ function LeftCard() {
 
   useEffect(() => {
     const fetchAirDatas = async () => {
-      if (!airData) return;
+      if (!weatherData) return;
       dispatch(fetchAirRequest());
       try {
         const data = await fetchAirData(
-          airData?.coord?.lat,
-          airData?.coord?.lon
+          weatherData?.coord?.lat,
+          weatherData?.coord?.lon
         );
         dispatch(fetchAirSuccess(data));
         console.log("air data", data);
@@ -74,7 +74,7 @@ function LeftCard() {
     };
 
     fetchAirDatas();
-  }, [airData, dispatch]);
+  }, [weatherData, dispatch]);
 
   useEffect(() => {
     const fetchPlaceDatas = async () => {
