@@ -150,7 +150,7 @@ function RightCard() {
         </div>
       </div>
       <div className="mt-4">
-        <h1>Today's Highlights</h1>
+        <h1 className="text-2xl ">Today's Highlights</h1>
       </div>
     </div>
   );
