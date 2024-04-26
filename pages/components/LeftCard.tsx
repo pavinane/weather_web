@@ -43,6 +43,8 @@ function LeftCard() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         startTransition(() => {
+          // Wrap the fetchData call in startTransition
+
           fetchData();
         });
       }, 1000);
@@ -93,8 +95,8 @@ function LeftCard() {
           </div>
 
           <Weather />
-          <div className="mt-6">
-            <div className="flex items-center ">
+          <div className="mt-6 flex  flex-col">
+            <div className="flex items-center justify-start ">
               {weatherData?.weather && (
                 <>
                   <img
@@ -114,7 +116,7 @@ function LeftCard() {
             </div>
           </div>
 
-          <div className="relative mt-12">
+          <div className="relative mt-8">
             {placeData &&
               placeData?.results?.map((item: any, index: number) => {
                 if (index === 0) {

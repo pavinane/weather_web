@@ -203,7 +203,7 @@ function RightCard() {
         </div>
       </div>
       <div>
-        <div className="flex justify-between mt-8  gap-4 items-center  ">
+        <div className="flex justify-between mt-4 gap-4 items-center  ">
           {weekweatherData?.list
             ?.filter((item: any) => item.dt_txt.includes("12:00:00"))
             .map((item: any, index: number) => {
