@@ -13,7 +13,7 @@ import {
   fetchPlaceSuccess,
   fetchPlaceFailure,
 } from "@/store/action/placeAction";
-import { fetchWeatherData, fetchAirData } from "@/service/weatherService";
+import { fetchWeatherData } from "@/service/weatherService";
 import { fetchPlaceData } from "@/service/placeService";
 import Weather from "./Weather";
 import { GiHeavyRain } from "react-icons/gi";
