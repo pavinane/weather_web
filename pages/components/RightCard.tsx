@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, startTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDegree } from "@/store/action/degree";
 import { TbTemperatureCelsius, TbTemperatureFahrenheit } from "react-icons/tb";
@@ -19,8 +19,8 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 import { AiOutlinePercentage } from "react-icons/ai";
 import { GoDotFill } from "react-icons/go";
 import { ImSad2 } from "react-icons/im";
-import { Flex, Progress } from "antd";
-import type { ProgressProps } from "antd";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 interface RootState {
   degree: {
@@ -42,7 +42,9 @@ function RightCard() {
   console.log("weatherData", weatherData);
 
   const handleDegreeChange = (newDegree: string) => {
-    dispatch(setDegree(newDegree));
+    startTransition(() => {
+      dispatch(setDegree(newDegree));
+    });
   };
 
   useEffect(() => {
@@ -241,7 +243,7 @@ function RightCard() {
       <div className="mt-4">
         <h1 className="text-xl font-semibold">Today's Highlights</h1>
         <div className="flex justify-between gap-4 mt-6 flex-wrap">
-          <UIStatus windNum={weatherData?.wind?.speed} />
+          <UIStatus progress={10} size={120} strokeWidth={10} />
           <WindStatus windNum={weatherData?.wind?.speed} />
           <SunSet sunset={formattedSunrise} sunrise={formattedSunset} />
           <Humdidity humidityNum={weatherData?.main?.humidity} />
@@ -255,26 +257,61 @@ function RightCard() {
 
 export default RightCard;
 
-export const UIStatus = ({ windNum }: any) => {
-  const twoColors: ProgressProps["strokeColor"] = {
-    "0%": "#fcdc4b",
-    "100%": "#fcdc4b",
-  };
+interface CircularProgressBarProps {
+  progress: number;
+  size: number;
+  strokeWidth: number;
+}
+export const UIStatus = ({
+  progress,
+  size,
+  strokeWidth,
+}: CircularProgressBarProps) => {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const offset = circumference - (progress / 100) * circumference;
   return (
     <div className="bg-white shadow-md rounded-2xl w-80  p-4 px-12 z-10 relative">
       <h1 className="text-[#b1b1b1] text-md">UV Index</h1>
       <div className="mt-2">
-        <Flex gap="small" wrap="wrap">
-          <Progress type="dashboard" percent={15} strokeColor={twoColors} />
-          {/* <Progress
-            type="dashboard"
-            steps={2}
-            strokeColor={twoColors}
-            percent={50}
-            trailColor="rgba(0, 0, 0, 0.06)"
-            strokeWidth={5}
-          /> */}
-        </Flex>
+        <svg
+          className="block"
+          width={size}
+          height={size}
+          viewBox={`0 0 ${size} ${size}`}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="#f3f4f6"
+            strokeWidth={strokeWidth}
+            fill="none"
+          />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="#fcdc4b"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            fill="none"
+          />
+          <text
+            x="50%"
+            y="50%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="2rem"
+            fill="#000"
+          >
+            {`${progress}`}
+          </text>
+        </svg>
       </div>
     </div>
   );

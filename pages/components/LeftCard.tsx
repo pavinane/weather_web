@@ -16,7 +16,7 @@ import {
 import { fetchWeatherData, fetchAirData } from "@/service/weatherService";
 import { fetchPlaceData } from "@/service/placeService";
 import Weather from "./Weather";
-// import LoadingSkeleton from "./LoadingSkeleton"; // Assuming you have a LoadingSkeleton component
+import { GiHeavyRain } from "react-icons/gi";
 
 function LeftCard() {
   const dispatch = useDispatch();
@@ -71,36 +71,44 @@ function LeftCard() {
 
   return (
     <div>
-      <div className="left-card text-black min-h-screen p-4">
-        <div className="flex items-center gap-4 justify-between">
-          <div className="flex items-center gap-4">
-            <IoSearch size={20} color="#000" />
-            <input
-              type="text"
-              name="city"
-              id="city"
-              placeholder="Search for places ..."
-              value={cityName}
-              className="outline-none"
-              onChange={(e) => setCityName(e.target.value)}
-            />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <div className="left-card text-black min-h-screen p-4">
+          <div className="flex items-center gap-4 justify-between">
+            <div className="flex items-center gap-4">
+              <IoSearch size={20} color="#000" />
+              <input
+                type="text"
+                name="city"
+                id="city"
+                placeholder="Search for places ..."
+                value={cityName}
+                className="outline-none"
+                onChange={(e) => setCityName(e.target.value)}
+              />
+            </div>
+
+            <div className="w-8 h-8 bg-[#F6F6F8] rounded-full p-2">
+              <MdLocationSearching color="#000" />
+            </div>
           </div>
 
-          <div className="w-8 h-8 bg-[#F6F6F8] rounded-full p-2">
-            <MdLocationSearching color="#000" />
-          </div>
-        </div>
-
-        <Suspense fallback={<LoadingSkeleton />}>
           <Weather />
           <div className="mt-6">
-            <div>
+            <div className="flex items-center ">
               {" "}
+              <img
+                src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                alt="weather icon"
+                className="w-12 h-12 rounded-full "
+              />
               {weatherData?.weather[0].description
                 ? weatherData?.weather[0].description
                 : weatherData?.weather.description}
             </div>
-            <div>rain - {weatherData?.clouds?.all} %</div>
+            <div className="flex items-center gap-2">
+              <GiHeavyRain />
+              <span> Rain - {weatherData?.clouds?.all} %</span>
+            </div>
           </div>
 
           <div className="relative mt-12">
@@ -135,15 +143,12 @@ function LeftCard() {
                 return null;
               })}
           </div>
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </div>
   );
 }
 
-function BigSpinner() {
-  return <h2>🌀 Loading...</h2>;
-}
 const LoadingSkeleton = () => {
   return (
     <div className="flex items-center space-x-4">
