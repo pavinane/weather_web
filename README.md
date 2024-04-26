@@ -1,8 +1,10 @@
 #Demo Video
 
- - demo video is there , this is fully integrated and responsive . 
-![Alt Text](https://github.com/pavinane/weather_web/assets/51283642/14a7c148-5f6b-4ab7-a586-2151931e8697)
+ - The demo video is there, this is fully integrated and responsive. 
 
+
+
+https://github.com/pavinane/weather_web/assets/51283642/ba2bd46f-e027-4592-bfe7-a38068878409
 
 
 # API Key
