@@ -43,8 +43,6 @@ function LeftCard() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         startTransition(() => {
-          // Wrap the fetchData call in startTransition
-
           fetchData();
         });
       }, 1000);
@@ -73,27 +71,26 @@ function LeftCard() {
 
   return (
     <div>
-      <Suspense fallback={<LoadingSkeleton />}>
-        <div className="left-card text-black min-h-screen p-4">
-          <div className="flex items-center gap-4 justify-between">
-            <div className="flex items-center gap-4">
-              <IoSearch size={20} color="#000" />
-              <input
-                type="text"
-                name="city"
-                id="city"
-                placeholder="Search for places ..."
-                value={cityName}
-                className="outline-none"
-                onChange={(e) => setCityName(e.target.value)}
-              />
-            </div>
-
-            <div className="w-8 h-8 bg-[#F6F6F8] rounded-full p-2">
-              <MdLocationSearching color="#000" />
-            </div>
+      <div className="left-card text-black min-h-screen p-4">
+        <div className="flex items-center gap-4 justify-between">
+          <div className="flex items-center gap-4">
+            <IoSearch size={20} color="#000" />
+            <input
+              type="text"
+              name="city"
+              id="city"
+              placeholder="Search for places ..."
+              value={cityName}
+              className="outline-none"
+              onChange={(e) => setCityName(e.target.value)}
+            />
           </div>
 
+          <div className="w-8 h-8 bg-[#F6F6F8] rounded-full p-2">
+            <MdLocationSearching color="#000" />
+          </div>
+        </div>
+        <Suspense fallback={<LoadingSkeleton />}>
           <Weather />
           <div className="mt-6 flex  flex-col">
             <div className="flex items-center justify-start ">
@@ -115,41 +112,40 @@ function LeftCard() {
               <span> Rain - {weatherData?.clouds?.all} %</span>
             </div>
           </div>
-
-          <div className="relative mt-8">
-            {placeData &&
-              placeData?.results?.map((item: any, index: number) => {
-                if (index === 0) {
-                  const names = item.tags
-                    .slice(0, 3)
-                    .map((tag: any) => tag.title);
-                  return (
-                    <div key={item.id} className="relative ">
-                      <img
-                        src={item.urls.regular}
-                        alt=""
-                        className="w-80 h-32 rounded-3xl object-cover filter contrast-[0.75]  "
-                      />
-                      <div className="absolute inset-0 flex justify-center items-center">
-                        <div className="flex flex-row gap-1">
-                          {names.map((name: string, index: number) => (
-                            <div
-                              key={index}
-                              className="text-white text-sm uppercase  p-2 rounded"
-                            >
-                              {name}
-                            </div>
-                          ))}
-                        </div>
+        </Suspense>
+        <div className="relative mt-8">
+          {placeData &&
+            placeData?.results?.map((item: any, index: number) => {
+              if (index === 0) {
+                const names = item.tags
+                  .slice(0, 3)
+                  .map((tag: any) => tag.title);
+                return (
+                  <div key={item.id} className="relative ">
+                    <img
+                      src={item.urls.regular}
+                      alt=""
+                      className="w-80 h-32 rounded-3xl object-cover filter contrast-[0.75]  "
+                    />
+                    <div className="absolute inset-0 flex justify-center items-center">
+                      <div className="flex flex-row gap-1">
+                        {names.map((name: string, index: number) => (
+                          <div
+                            key={index}
+                            className="text-white text-sm uppercase  p-2 rounded"
+                          >
+                            {name}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  );
-                }
-                return null;
-              })}
-          </div>
+                  </div>
+                );
+              }
+              return null;
+            })}
         </div>
-      </Suspense>
+      </div>
     </div>
   );
 }

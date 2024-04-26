@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.5",
     "@types/react-redux": "^7.1.33",
     "next": "^14.2.3",
+    "ngrok": "^5.0.0-beta.2",
     "react": "^18",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18",

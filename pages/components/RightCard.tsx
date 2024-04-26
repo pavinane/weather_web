@@ -19,7 +19,6 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 import { AiOutlinePercentage } from "react-icons/ai";
 import { GoDotFill } from "react-icons/go";
 import { ImSad2 } from "react-icons/im";
-import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 interface RootState {
