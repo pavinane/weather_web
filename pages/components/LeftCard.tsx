@@ -95,15 +95,18 @@ function LeftCard() {
           <Weather />
           <div className="mt-6">
             <div className="flex items-center ">
-              {" "}
-              <img
-                src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-                alt="weather icon"
-                className="w-12 h-12 rounded-full "
-              />
-              {weatherData?.weather[0].description
-                ? weatherData?.weather[0].description
-                : weatherData?.weather.description}
+              {weatherData?.weather && (
+                <>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                    alt="weather icon"
+                    className="w-12 h-12 rounded-full "
+                  />
+                  {weatherData?.weather[0].description
+                    ? weatherData?.weather[0].description
+                    : weatherData?.weather.description}
+                </>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <GiHeavyRain />
